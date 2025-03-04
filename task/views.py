@@ -7,5 +7,6 @@ def index(request):
     return render(request, 'task/index.html', {'tasks': tasks})
 
 def detail(request, pk):
-    tasks=Task.objects.get(pk=pk)
-    return render(request, 'task/deatil.html',{'tasks': tasks})
+    task=Task.objects.get(pk=pk)
+    return render(request, 'task/detail.html',{'task': task})
+

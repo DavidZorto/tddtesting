@@ -24,7 +24,7 @@ class IndexPageTest(TestCase):
         self.assertContains(response, tasks.title)
 
 class DetailPage(TestCase):
-    def setup(self):
+    def setUp(self):
         self.task = Task.objects.create(title='First Task', description='The Description')
 
     def test_detail_page_returns_correct_response(self):
@@ -33,4 +33,8 @@ class DetailPage(TestCase):
         self.assertTemplateUsed(response, 'task/detail.html')
         self.assertEqual(response.status_code, 200) 
    
-    
+    def test_page_has_correct_content(self):
+        response= self.client.get(f'/{self.task.id}/')
+        self.assertContains(response, self.task.title)
+        self.assertContains(response, self.task.description)
+
